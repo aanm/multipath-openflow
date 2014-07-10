@@ -1,0 +1,366 @@
+/*
+ * Copyright (c) 2013 Pantheon Technologies s.r.o. and others. All rights reserved.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v1.0 which accompanies this distribution,
+ * and is available at http://www.eclipse.org/legal/epl-v10.html
+ */
+ 
+ module openflow-augments {
+    namespace "urn:opendaylight:openflow:augments";
+    prefix "aug";
+    
+    import yang-ext {prefix ext;}
+    import ietf-inet-types {prefix inet;}
+    import ietf-yang-types {prefix yang;}
+
+    import openflow-types {prefix oft;}
+    import openflow-protocol {prefix ofproto;}
+    import openflow-action {prefix ofaction;}
+    import openflow-instruction {prefix ofinstruction;}
+    import openflow-extensible-match {prefix oxm;}
+
+    revision "2013-10-02" {
+        description "OpenFlow 1.3 - augments model. 
+                    Please visit 
+                    https://wiki.opendaylight.org/view/File:OpenFlow_Protocol_Library_-_Project_documentation.pdf
+                     - Augmentation Tables chapter";
+    }
+
+// OFP_MATCH AUGMENTS
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "port-number-match-entry";
+         leaf port-number {
+             type oft:port-number;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "metadata-match-entry";
+         leaf metadata {
+             type binary;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "mask-match-entry";
+         leaf mask {
+             type binary;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "mac-address-match-entry";
+         leaf mac-address {
+             type yang:mac-address;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "eth-type-match-entry";
+         leaf eth-type {
+             type oft:ether-type;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "vlan-vid-match-entry";
+         leaf vlan-vid {
+             type uint16;
+         }
+         leaf cfi-bit {
+             type boolean;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "vlan-pcp-match-entry";
+         leaf vlan-pcp {
+             type uint8;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "dscp-match-entry";
+         leaf dscp {
+             type inet:dscp;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "ecn-match-entry";
+         leaf ecn {
+             type uint8;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "protocol-number-match-entry";
+         leaf protocol-number {
+             type uint8;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "port-match-entry";
+         leaf port {
+             type inet:port-number;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "icmpv4-type-match-entry";
+         leaf icmpv4-type {
+             type uint8;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "icmpv4-code-match-entry";
+         leaf icmpv4-code {
+             type uint8;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "op-code-match-entry";
+         leaf op-code {
+             type uint16;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "ipv6-flabel-match-entry";
+         leaf ipv6-flabel {
+             type inet:ipv6-flow-label;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "icmpv6-type-match-entry";
+         leaf icmpv6-type {
+             type uint8;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "icmpv6-code-match-entry";
+         leaf icmpv6-code {
+             type uint8;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "ipv6-address-match-entry";
+         leaf ipv6-address {
+             type inet:ipv6-address;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "ipv4-address-match-entry";
+         leaf ipv4-address {
+             type inet:ipv4-address;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "mpls-label-match-entry";
+         leaf mpls-label {
+             type uint32;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "tc-match-entry";
+         leaf tc {
+             type uint8;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "bos-match-entry";
+         leaf bos {
+             type boolean;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "isid-match-entry";
+         leaf isid {
+             type uint32;
+         }
+     }
+     augment "/oxm:oxm-container/oxm:match-entries" {
+         ext:augment-identifier "pseudo-field-match-entry";
+         leaf pseudo-field {
+             type oft:ipv6-exthdr-flags;
+         }
+     }
+
+// OFP_ACTION AUGMENTS
+     augment "/ofaction:actions-container/ofaction:action" {
+         ext:augment-identifier "port-action";
+         leaf port {
+             type oft:port-number;
+         }
+     }
+     augment "/ofaction:actions-container/ofaction:action" {
+         ext:augment-identifier "max-length-action";
+         leaf max-length {
+             type uint16;
+         }
+     }
+     augment "/ofaction:actions-container/ofaction:action" {
+         ext:augment-identifier "mpls-ttl-action";
+         leaf mpls-ttl {
+             type uint8;
+         }
+     }
+     augment "/ofaction:actions-container/ofaction:action" {
+         ext:augment-identifier "ethertype-action";
+         leaf ethertype {
+             type oft:ether-type;
+         }
+     }
+     augment "/ofaction:actions-container/ofaction:action" {
+         ext:augment-identifier "queue-id-action";
+         leaf queue-id {
+             type uint32;
+         }
+     }
+     augment "/ofaction:actions-container/ofaction:action" {
+         ext:augment-identifier "group-id-action";
+         leaf group-id {
+             type uint32;
+         }
+     }
+     augment "/ofaction:actions-container/ofaction:action" {
+         ext:augment-identifier "nw-ttl-action";
+         leaf nw-ttl {
+             type uint8;
+         }
+     }
+     augment "/ofaction:actions-container/ofaction:action" {
+         ext:augment-identifier "oxm-fields-action";
+         uses oxm:oxm-fields-grouping;
+     }
+     augment "/ofaction:actions-container/ofaction:action" {
+         ext:augment-identifier "experimenter-action";
+         leaf experimenter {
+             type uint32;
+         }
+         leaf data {
+             type binary;
+         }
+     }
+     // OF1.0 structures
+     augment "/ofaction:actions-container/ofaction:action" {
+         ext:augment-identifier "vlan-vid-action";
+         leaf vlan-vid {
+             type uint16;
+         }
+     }
+     augment "/ofaction:actions-container/ofaction:action" {
+         ext:augment-identifier "vlan-pcp-action";
+         leaf vlan-pcp {
+             type uint8;
+         }
+     }
+     augment "/ofaction:actions-container/ofaction:action" {
+         ext:augment-identifier "dl-address-action";
+         leaf dl-address {
+             type yang:mac-address;
+         }
+     }
+     augment "/ofaction:actions-container/ofaction:action" {
+         ext:augment-identifier "nw-tos-action";
+         leaf nw-tos {
+             type uint8;
+         }
+     }
+     augment "/ofaction:actions-container/ofaction:action" {
+         ext:augment-identifier "ip-address-action";
+         leaf ip-address {
+             type inet:ipv4-address;
+         }
+     }
+
+// OFP_TABLE_FEATURES_PROPERTIES AUGMENTS
+     augment "/ofproto:table-features-properties-container/ofproto:table-feature-properties" {
+         ext:augment-identifier "instruction-related-table-feature-property";
+         uses ofinstruction:instructions-grouping;
+     }
+     augment "/ofproto:table-features-properties-container/ofproto:table-feature-properties" {
+         ext:augment-identifier "next-table-related-table-feature-property";
+         list next-table-ids {
+             config false;
+             leaf table-id {
+                 type uint8;
+             }
+         }
+     }
+     augment "/ofproto:table-features-properties-container/ofproto:table-feature-properties" {
+         ext:augment-identifier "action-related-table-feature-property";
+         uses ofaction:actions-grouping;
+     }
+     augment "/ofproto:table-features-properties-container/ofproto:table-feature-properties" {
+         ext:augment-identifier "oxm-related-table-feature-property";
+         uses oxm:oxm-fields-grouping;
+     }
+     augment "/ofproto:table-features-properties-container/ofproto:table-feature-properties" {
+         ext:augment-identifier "experimenter-related-table-feature-property";
+         leaf experimenter {
+             type uint32;
+         }
+         leaf exp-type {
+             type uint32;
+         }
+         leaf data {
+             type binary;
+         }
+     }
+
+// OFP_INSTRUCTION AUGMENTS
+     augment "/ofinstruction:instruction-container/ofinstruction:instruction" {
+         ext:augment-identifier "table-id-instruction";
+         leaf table-id {
+             type uint8;
+         }
+     }
+     augment "/ofinstruction:instruction-container/ofinstruction:instruction" {
+         ext:augment-identifier "metadata-instruction";
+         leaf metadata {
+             type binary;
+         }
+         leaf metadata-mask {
+             type binary;
+         }
+     }
+     augment "/ofinstruction:instruction-container/ofinstruction:instruction" {
+         ext:augment-identifier "actions-instruction";
+         uses ofaction:actions-grouping;
+     }
+     augment "/ofinstruction:instruction-container/ofinstruction:instruction" {
+         ext:augment-identifier "meter-id-instruction";
+         leaf meter-id {
+             type uint32;
+         }
+     }
+     augment "/ofinstruction:instruction-container/ofinstruction:instruction" {
+         ext:augment-identifier "experimenter-instruction";
+         leaf experimenter {
+             type uint32;
+         }
+         leaf data {
+             type binary;
+         }
+     }
+     
+// OFP_QUEUE_PROP AUGMENTS
+     augment "/ofproto:queue-prop-container/ofproto:queue-property" {
+         ext:augment-identifier "rate-queue-property";
+         leaf rate {
+             type uint16;
+         }
+     }
+     augment "/ofproto:queue-prop-container/ofproto:queue-property" {
+         ext:augment-identifier "experimenter-queue-property";
+         leaf experimenter {
+             type uint32;
+         }
+         leaf data {
+             type binary;
+         }
+     }
+     
+// OFP_ERROR_AUGMENTS (only experimenter till OpenFlow v1.3)
+    augment "/ofproto:error-message" {
+         ext:augment-identifier "experimenter-error";
+         leaf exp_type {
+             type uint16;
+         }
+         leaf experimenter {
+             type uint32;
+         }
+     }
+
+}
