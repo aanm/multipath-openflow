@@ -1,0 +1,15 @@
+[submodule "multiroutes-calculator"]
+	path = multiroutes-calculator
+	url = ./multiroutes-calculator
+[submodule "multiroutes-calculatorv2"]
+	path = multiroutes-calculatorv2
+	url = ./multiroutes-calculatorv2/
+[submodule "controller"]
+	path = controller
+	url = ./controller/
+[submodule "openflowjava"]
+	path = openflowjava
+	url = ./openflowjava/
+[submodule "openflowplugin"]
+	path = openflowplugin
+	url = ./openflowplugin/
